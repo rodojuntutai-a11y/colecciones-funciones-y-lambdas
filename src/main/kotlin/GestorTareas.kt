@@ -27,6 +27,7 @@ class GestorTareas {
 
     fun encontrarPrimeraTareaUrgente(tareas: List<Tarea>): Tarea? {
         TODO("Implementar: Debe encontrar la primera tarea con prioridad 3")
+
     }
 
     fun buscarPorId(
