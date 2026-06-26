@@ -49,20 +49,22 @@ class ProductoManager {
         precioMin: Double,
         precioMax: Double,
     ): List<Producto> {
-        return productos.filter { it.categoria == it.categoria }
+        return productos.filter { it.precio in precioMin..precioMax }
     }
 
     fun filtrarPorCategoria(
         productos: List<Producto>,
         categoria: String,
     ): List<Producto> {
-        TODO("Implementar: Debe retornar solo los productos de la categoría especificada")
+        return productos.filter { it.categoria == categoria }
     }
 
     // Parte C: Combinación de Map y Filter
 
     fun obtenerNombresProductosDisponibles(productos: List<Producto>): List<String> {
-        TODO("Implementar: Debe filtrar productos en stock y retornar sus nombres")
+        return productos
+            .filter { it.enStock }
+            .map { it.nombre }
     }
 
     fun aplicarDescuentoCategoria(
@@ -70,13 +72,17 @@ class ProductoManager {
         categoria: String,
         descuentoPorcentaje: Double,
     ): List<Double> {
-        TODO("Implementar: Debe aplicar descuento solo a productos de la categoría especificada")
+        return productos
+            .filter { it.categoria == categoria }
+            .map { it.precio * (1 - descuentoPorcentaje / 100.0) }
     }
 
     fun generarReporteProductosCaros(
         productos: List<Producto>,
         precioMinimo: Double,
     ): List<String> {
-        TODO("Implementar: Debe generar reporte de productos caros disponibles en formato especial")
+        return productos
+            .filter { it.enStock && it.precio > precioMinimo }
+            .map { "PRODUCTO PREMIUM: ${it.nombre} (\$${it.precio})" }
     }
 }
