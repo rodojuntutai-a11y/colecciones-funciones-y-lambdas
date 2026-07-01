@@ -33,14 +33,14 @@ class ProcesadorTransacciones {
         transacciones: List<Transaccion>,
         transformacion: (Double) -> Double,
     ): List<Double> {
-        TODO("Implementar: Debe aplicar la función de transformación a cada monto")
+        return transacciones.map { transformacion(it.monto) }
     }
 
     fun <T> procesarCon(
         transacciones: List<Transaccion>,
         procesador: (Transaccion) -> T,
     ): List<T> {
-        TODO("Implementar: Debe procesar cada transacción con la función dada")
+        return transacciones.map(procesador)
     }
 
     // Parte B: Funciones de Filtrado como Parámetros
@@ -49,14 +49,16 @@ class ProcesadorTransacciones {
         transacciones: List<Transaccion>,
         predicado: (Transaccion) -> Boolean,
     ): List<Transaccion> {
-        TODO("Implementar: Debe filtrar transacciones usando el predicado")
+        return transacciones.filter(predicado)
     }
 
     fun filtrarConMultiplesCriterios(
         transacciones: List<Transaccion>,
         criterios: List<(Transaccion) -> Boolean>,
     ): List<Transaccion> {
-        TODO("Implementar: Debe filtrar transacciones que cumplan TODOS los criterios")
+        return transacciones.filter { transaccion ->
+            criterios.all { criterio -> criterio(transaccion) }
+        }
     }
 
     // Parte C: Funciones de Agregación como Parámetros
